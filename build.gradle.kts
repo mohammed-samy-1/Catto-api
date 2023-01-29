@@ -43,6 +43,8 @@ dependencies {
 
     // Koin core features
     implementation("io.insert-koin:koin-core:$koin_version")
+    // Koin for Ktor
     implementation("io.insert-koin:koin-ktor:$koin_version")
+    // SLF4J Logger
     implementation("io.insert-koin:koin-logger-slf4j:$koin_version")
 }

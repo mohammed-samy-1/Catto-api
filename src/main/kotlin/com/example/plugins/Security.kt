@@ -9,6 +9,7 @@ import io.ktor.server.sessions.*
 import io.ktor.server.response.*
 import io.ktor.server.application.*
 import io.ktor.server.routing.*
+import io.ktor.util.*
 
 fun Application.configureSecurity() {
 
@@ -35,14 +36,9 @@ fun Application.configureSecurity() {
     }
     intercept(ApplicationCallPipeline.Features){
         if (call.sessions.get<ChatSession>()== null){
-            call.sessions.set(ChatSession())
+            val userName = call.parameters["username"] ?: "guest"
+            call.sessions.set(ChatSession(userName, generateNonce()))
         }
     }
-    routing {
-        get("/session/increment") {
-            val session = call.sessions.get<MySession>() ?: MySession()
-            call.sessions.set(session.copy(count = session.count + 1))
-            call.respondText("Counter is ${session.count}. Refresh to increment.")
-        }
-    }
+
 }

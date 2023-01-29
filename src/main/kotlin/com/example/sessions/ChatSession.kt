@@ -1,5 +1,6 @@
 package com.example.sessions
 
 data class ChatSession(
-    val count: Int = 0
+    val name:String,
+    val sessionId:String
 )
